@@ -21,7 +21,7 @@ defmodule Forcex.Bulk do
     |> process_response
   end
   def process_response(%HTTPoison.Response{body: body, headers: %{"Content-Type" => "application/json" <> _} = headers} = resp) do
-    %{resp | body: Poison.decode!(body, keys: :atoms), headers: Map.drop(headers, ["Content-Type"])}
+    %{resp | body: Jason.decode!(body, keys: :atoms), headers: Map.drop(headers, ["Content-Type"])}
     |> process_response
   end
   def process_response(%HTTPoison.Response{body: body, status_code: status}) when status < 300 and status >= 200, do: body
@@ -37,7 +37,7 @@ defmodule Forcex.Bulk do
   end
 
   def json_request(method, url, body, headers, options) do
-    raw_request(method, url, JSX.encode!(body), headers, options)
+    raw_request(method, url, Jason.encode!(body), headers, options)
   end
 
   def raw_request(method, url, body, headers, options) do

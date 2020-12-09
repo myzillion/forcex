@@ -8,8 +8,8 @@ defmodule Forcex.Mixfile do
   def project do
     [
       app: :forcex,
-      version: "0.8.4",
-      elixir: "~> 1.5",
+      version: "0.8.6",
+      elixir: "~> 1.11.2",
       name: "Forcex",
       description: @description,
       package: package(),
@@ -47,7 +47,7 @@ defmodule Forcex.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :httpoison, :erlsom, :exjsx, :ssl, :html_entities]]
+    [applications: [:logger, :httpoison, :erlsom, :ssl, :html_entities]]
   end
 
   # Dependencies can be Hex packages:
@@ -61,18 +61,17 @@ defmodule Forcex.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.13 or ~> 1.0"},
-      {:exjsx, "< 5.0.0"},
-      {:poison, "~> 2.0 or ~> 3.1"},
+      {:httpoison, "== 1.7.0"},
+      {:jason, "~> 1.2.2"},
       {:timex, "~> 2.0 or ~> 3.0"},
+      {:html_entities, "~> 0.4"},
       {:erlsom, "~> 1.4"},
       {:excoveralls, "~> 0.5", only: :test},
       {:ex_doc, "~> 0.11", only: :dev},
       {:earmark, "~> 1.1", only: :dev, override: true},
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev, :test], runtime: false},
       {:mox, "~> 0.3", only: :test},
-      {:mix_test_watch, "~> 0.5", only: [:dev, :test], runtime: false},
-      {:html_entities, "~> 0.4"}
+      {:mix_test_watch, "~> 0.5", only: [:dev, :test], runtime: false}
     ]
   end
 

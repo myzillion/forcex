@@ -39,7 +39,7 @@ defmodule Forcex.Api.Http do
     |> process_response
   end
   def process_response(%HTTPoison.Response{body: body, headers: %{"Content-Type" => "application/json" <> _} = headers} = resp) do
-    %{resp | body: Poison.decode!(body, keys: :atoms), headers: Map.drop(headers, ["Content-Type"])}
+    %{resp | body: Jason.decode!(body, keys: :atoms), headers: Map.drop(headers, ["Content-Type"])}
     |> process_response
   end
   def process_response(%HTTPoison.Response{body: body, status_code: 200}), do: body
