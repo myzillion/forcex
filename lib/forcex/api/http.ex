@@ -44,6 +44,7 @@ defmodule Forcex.Api.Http do
   end
   def process_response(%HTTPoison.Response{body: body, status_code: 200}), do: body
   def process_response(%HTTPoison.Response{body: body, status_code: status}), do: {status, body}
+  def process_response(response) when response |> is_map, do: response
 
   def process_request_headers(headers), do: headers ++ @user_agent ++ @accept ++ @accept_encoding
 
